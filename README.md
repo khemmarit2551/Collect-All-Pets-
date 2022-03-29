@@ -1,1 +1,46 @@
-# Collect-All-Pets-
+ if Library then
+     Library:Destroy()
+end
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Halo | No.1", "DarkTheme")
+local Tab = Window:NewTab("Auto Farm")
+local Section = Tab:NewSection("AutoFarm")
+Section:NewToggle("Auto Coin", "Click To coin", function(v)
+getgenv().Orb = v
+while Orb do task.wait()
+    for i,v in pairs(game:GetService("Workspace").Drops:GetDescendants()) do 
+        if v:IsA"Model" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Base.CFrame
+        end
+    end
+end
+end)
+Section:NewToggle("Auto Jump", "Click To Jump", function(v)
+getgenv().Jump = v
+while Jump do wait()
+pcall(function()    
+        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+end)
+    end
+end)
+Section:NewToggle("Tp to Egg", "Next Island for Got new", function(v)
+getgenv().Egg = v
+while Egg do task.wait()
+for i,v in pairs(game:GetService("Workspace"):FindFirstChild("HiddenEggs"):GetDescendants()) do
+  if v.Name == "TouchInterest" and v.Parent then
+        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
+        wait(.1)
+        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+           end
+        end
+    end
+end)
+Section:NewButton("Destroy Door", "ButtonInfo", function()
+    game:GetService("Workspace").AreaBarriers:Destroy()
+end)
+Section:NewSlider("Speed", "", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewKeybind("Toggle UI", "", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end) 
